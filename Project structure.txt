@@ -1,0 +1,18 @@
+Disease-Prediction-with-Medical-Recommendation/
+│
+├── data/
+│   ├── description.csv
+│   ├── diets.csv
+│   ├── medications.csv
+│   ├── precautions_df.csv
+│   ├── symptoms_df.csv
+│   ├── symptom_severity.csv
+│   └── Training.csv
+│
+├── model/
+│   ├── disease_prediction_model.pkl
+│   └── label_encoder.pkl
+│
+├── app.py               # Streamlit frontend
+├── disease_model.ipynb  # Model training, EDA, and testing
+└── README.md
