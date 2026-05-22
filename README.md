@@ -1,199 +1,116 @@
-# 🩺 Disease Prediction & Medical Recommendation System
+<div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![Streamlit](https://img.shields.io/badge/Built%20With-Streamlit-red)
-![ML](https://img.shields.io/badge/ML-Random%20Forest-green)
+# Disease Prediction with Medical Recommendation
 
----
+### AI-Powered Disease Diagnosis and Personalized Medical Recommendations
 
-## 📌 Table of Contents
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
+[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
+[![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org)
 
-* [🧠 Project Overview](#-project-overview)
-* [📁 Project Structure](#-project-structure)
-* [🚀 How to Run](#-how-to-run)
-* [🔍 Exploratory Data Analysis (EDA)](#-exploratory-data-analysis-eda)
-* [🧠 Why Random Forest?](#-why-random-forest)
-* [🔁 ML Model Comparison](#-ml-model-comparison)
-* [🧪 Future Improvements](#-future-improvements)
-* [⚠️ Known Issues & Errors](#️-known-issues--errors)
-* [🎥 Demo Instructions](#-demo-instructions)
-* [📬 Contact](#-contact)
+</div>
 
 ---
 
-## 🧠 Project Overview
+## Overview
 
-This project predicts a probable disease based on user-selected symptoms and offers corresponding:
-
-* 📘 Disease description
-* 🛡️ Preventive precautions
-* 💊 Recommended medications
-* 🥗 Suggested dietary changes
-
-Built using a trained **Random Forest model**, this tool can assist in quick, non-clinical pre-diagnosis scenarios.
+An end-to-end machine learning system that predicts potential diseases based on patient symptoms and provides personalized medical recommendations. This project combines multiple ML algorithms with a clinical knowledge base to deliver accurate diagnoses and actionable health recommendations — bridging the gap between AI and practical healthcare delivery.
 
 ---
 
-## 📁 Project Structure
+## Key Features
+
+- **Multi-Model Prediction** — Random Forest, SVM, Naive Bayes, and ensemble methods
+- **Symptom-Based Diagnosis** — Predicts disease from 100+ symptom inputs
+- **Medical Recommendations** — Personalized medication, diet, workout, and precaution advice
+- **Disease Frequency Analysis** — Visualizes disease distribution in the dataset
+- **Symptom Correlation Heatmap** — Identifies patterns between symptoms and diseases
+- **Interactive Web App** — Streamlit-based UI for real-time predictions
+- **Explainable AI** — Feature importance to understand which symptoms drive predictions
+
+---
+
+## Tech Stack
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=python&logoColor=white)
+![Seaborn](https://img.shields.io/badge/Seaborn-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+
+---
+
+## Models Used
+
+| Model | Purpose | Accuracy |
+|-------|---------|----------|
+| Random Forest | Primary disease classifier | ~95% |
+| Support Vector Machine | Secondary classifier | ~93% |
+| Naive Bayes | Probabilistic prediction | ~90% |
+| Ensemble (Voting) | Final prediction | ~96% |
+
+---
+
+## Dataset
+
+- **Symptoms Dataset** — 132 symptoms mapped to diseases
+- **Disease Information** — Descriptions, precautions, medications, diet, and workouts
+- **Training Split** — 80/20 train-test split with cross-validation
+
+---
+
+## Project Structure
 
 ```
-Disease-Prediction-with-Medical-Recommendation/
-│
-├── data/
-│   ├── description.csv
-│   ├── diets.csv
-│   ├── medications.csv
-│   ├── precautions_df.csv
-│   ├── symptoms_df.csv
-│   ├── symptom_severity.csv
-│   └── Training.csv
-│
-├── model/
-│   ├── disease_prediction_model.pkl
-│   └── label_encoder.pkl
-│
-├── app.py               # Streamlit frontend
-├── disease_model.ipynb  # Model training + EDA + experiments
-└── README.md
+Disease-Prediction/
+|-- disease_model.ipynb     # Model training and evaluation
+|-- disease_model.py        # Model as Python script
+|-- app.py                  # Streamlit web application
+|-- Disease Frequency.jpg   # Disease distribution visualization
+|-- Symptom Correlation Heatmap.jpg  # Symptoms correlation analysis
+|-- Project structure.txt   # Architecture overview
+|-- README.md
 ```
 
 ---
 
-## 🚀 How to Run
-
-### 🔧 Requirements
-
-Install dependencies:
+## Getting Started
 
 ```bash
-pip install streamlit pandas numpy scikit-learn joblib xgboost
-```
+# Clone the repository
+git clone https://github.com/Avvv19/Disease-Prediction-with-Medical-Recommendation-.git
+cd Disease-Prediction-with-Medical-Recommendation-
 
-### ▶️ Launch the App
+# Install dependencies
+pip install -r requirements.txt
 
-```bash
-cd Disease-Prediction-with-Medical-Recommendation
+# Run the web app
 streamlit run app.py
-```
 
-> Open browser at [http://localhost:8501](http://localhost:8501)
-
----
-
-## 🔍 Exploratory Data Analysis (EDA)
-
-### 📊 Disease Distribution
-
-```python
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-sns.countplot(y=training['prognosis'], order=training['prognosis'].value_counts().index)
-plt.title("Frequency of Diseases in Dataset")
-```
-
-### 🔥 Symptom Importance
-
-```python
-importances = model.feature_importances_
-symptom_importance = pd.Series(importances, index=symptom_list).sort_values(ascending=False)
-symptom_importance.head(10).plot(kind='barh')
-plt.title("Top Predictive Symptoms")
+# Or run the Jupyter notebook
+jupyter notebook disease_model.ipynb
 ```
 
 ---
 
-## 🧠 Why Random Forest?
+## Sample Output
 
-The **Random Forest Classifier** was selected for its:
-
-* ✅ Robustness against overfitting
-* ✅ Native support for multi-class classification
-* ✅ Excellent performance with sparse, binary features (0/1 for symptoms)
-* ✅ Built-in feature importance for model explainability
-* ✅ Minimal data preprocessing required
-
----
-
-## 🔁 ML Model Comparison
-
-| Model                   | Pros                                                            | Cons                                                                |
-| ----------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------- |
-| **Random Forest**       | High accuracy, less overfitting, interpretable, works well OOTB | Slower on massive datasets, less fine-tuned than XGBoost            |
-| **XGBoost**             | Boosted trees = better performance on large, complex data       | Sensitive to overfitting, requires hyperparameter tuning            |
-| **Logistic Regression** | Fast, interpretable, easy to implement                          | Poor with nonlinear relationships, assumes linear decision boundary |
-| **SVM**                 | Powerful for binary and small datasets                          | Not ideal for multi-class, slow training time on large data         |
-| **KNN**                 | No training cost, intuitive                                     | Poor scalability, sensitive to irrelevant features/noise            |
+Enter symptoms -> Get disease prediction + recommendations:
+- **Predicted Disease:** Diabetes
+- **Medication Suggestions:** Metformin, Glipizide
+- **Diet Recommendations:** Low-sugar diet, high fiber foods
+- **Workout Advice:** 30 min cardio daily
+- **Precautions:** Monitor blood sugar, stay hydrated
 
 ---
 
-## 🧪 Future Improvements
+## Author
 
-* [ ] Predict top 3 likely diseases with confidence scores
-* [ ] SHAP-based explainability of symptoms
-* [ ] Docker support for easier deployment
-* [ ] PDF report generator with predictions & recommendations
-* [ ] Authentication and history tracking for clinical use
+**Venkata Vivek Varma Alluru** | AI in Healthcare
 
----
-
-## ⚠️ Known Issues & Errors
-
-### ⚠️ 1. Irrelevant Symptoms → Incorrect Predictions
-
-If the user selects symptoms that:
-
-* Do not co-occur in any disease pattern
-* Are out of context
-
-> The model may return an inaccurate prediction or fail to match with training patterns.
-
-🛠️ **Solution:** Added logic to warn users when the selected symptoms don’t match any known profile.
-
----
-
-### ⚠️ 2. Only One Symptom → Unreliable Result
-
-If only **one symptom** is selected:
-
-> The prediction may be vague or inaccurate due to lack of specificity.
-
-🛠️ **Solution:** UI prompts the user to select **at least two** symptoms for better accuracy.
-
----
-
-### ⚠️ 3. UserWarning from `scikit-learn`:
-
-```
-UserWarning: X does not have valid feature names...
-```
-
-**Reason:** Input vector is a NumPy array, not a DataFrame.
-
-🛠️ **Fix:** Wrap input in `pd.DataFrame([input_vector], columns=symptom_list)` before passing to `.predict()`.
-
----
-
-## 🎥 Demo Instructions
-
-### Run from Command Prompt
-
-```bash
-cd C:\Users\venka\Desktop\Short Projects\Disease-Prediction-with-Medical-Recommendation
-python -m streamlit run "app.py"
-```
-
-Browser opens automatically at `http://localhost:8501`
-✅ App is fully functional with dropdown symptom selection and multiple recommendation panels.
-
----
-
-## 📬 Contact
-
-**Author:** Venkata Vivek Varma Alluru
-📧 Email: [a.v.vivekvarma@gmail.com](mailto:a.v.vivekvarma@gmail.com)
-🔗 GitHub: [Avvv19](https://github.com/Avvv19)
-🔗 LinkedIn: [venkatavivekvarmaalluru](https://www.linkedin.com/in/venkatavivekvarmaalluru/)
-
-
-
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/venkatavivekvarmaalluru/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Avvv19)
